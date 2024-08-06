@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+<th:block th:replace="layouts/config :: config "/>
+<body class="bg-light">
+<th:block th:replace="layouts/header::header"/>
+
+<div class="container">
+        <div class="col-md-12 order-md-1">
+            <form class="needs-validation" novalidate="" th:action="@{/notice/regNotice}" method="post">
+
+                <div class="mb-3">
+                    <label for="title">제목</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="제목" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            제목을 입력하세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="content">내용</label>
+                    <textarea id="content" name="content" class="form-control h-25" rows="10"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="required">중요도</label>
+                    <select class="custom-select d-block w-100" name="required" id="required" >
+                        <option value="0">0</option>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-warning">작성 완료</button>
+            </form>
+        </div>
+</div>
+
+<th:block th:replace="layouts/footer::footer"/>
+</body>
+</html>

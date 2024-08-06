@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                th:fragment="config">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>모바일 청첩장</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link href="/static/css/style.css" rel="stylesheet">
+
+    <meta charset="utf-8">
+
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Product example · Bootstrap v4.6</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/product/">
+
+
+</head>
+<style>
+    .container{
+        font-family: "Hi Melody", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    #logoImg{
+        height: 60px;
+        width: 60px;
+    }
+
+    #prodImg{
+        height: 80px;
+        width: 40px;
+    }
+
+     .bd-placeholder-img {
+         font-size: 1.125rem;
+         text-anchor: middle;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+         user-select: none;
+     }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+
+    .btn-custom {
+        background-color: #343a40; /* Darker shade for a sophisticated look */
+        border-color: #343a40;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #23272b; /* Slightly lighter shade for hover effect */
+        border-color: #23272b;
+        color: navajowhite;
+    }
+
+
+    /* 기본 스타일 - 높이 500px로 고정하고, 너비를 자동 조정 */
+    img.fixed-height {
+        height: 500px;
+        width: auto;
+    }
+
+    /* 화면 너비가 768px 이하일 때 */
+    @media (max-width: 768px) {
+        img.fixed-height {
+            max-width: none; /* 최대 너비 제한 해제 */
+        }
+    }
+
+    /* 화면 너비가 768px 이상일 때 */
+    @media (min-width: 769px) {
+        img.fixed-height {
+            max-width: 1280px; /* 최대 너비를 1200px로 제한 */
+        }
+    }
+
+</style>
+</html>

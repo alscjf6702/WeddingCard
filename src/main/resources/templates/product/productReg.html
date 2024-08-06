@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 등록</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+<th:block th:replace="layouts/config :: config"/>
+<th:block th:replace="layouts/header :: header"/>
+<div class="container">
+    <h2 class="text-center mt-5">상품 등록</h2>
+    <form action="/productReg" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="productName">상품명</label>
+            <input type="text" class="form-control" id="productName" name="productName" required >
+        </div>
+        <div class="form-group">
+            <label for="productCode">상품 코드</label>
+            <input type="text" class="form-control" id="productCode" name="productCode" required >
+        </div>
+        <div class="form-group">
+            <label for="price">가격</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+            <label for="discount">할인률 (%)</label>
+            <input type="number" class="form-control" id="discount" name="discount" value="0" >
+        </div>
+        <div class="form-group">
+            <label for="quantity">수량</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" value="0" >
+        </div>
+        <div class="form-group">
+            <label for="picName">청첩장 이미지</label>
+            <input type="file" class="form-control-file" id="picName" name="picName">
+        </div>
+        <button type="submit" class="btn btn-custom">등록</button>
+        <a href="/main" class="btn btn-info">메인페이지</a>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+
+
+</html>

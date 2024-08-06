@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+
+<th:block th:replace="layouts/config::config"/>
+<th:block th:replace="layouts/header :: header"/>
+
+
+<body class="bg-light">
+<div class="container">
+    <!--상품 정보-->
+    <div class="position-relative overflow-hidden p-3 p-md-1 m-md-1 text-center bg-light">
+            <h1 class="display-4 font-weight-normal" th:text="${product.get().getProductName()}"></h1>
+            <img th:src="${product.get().getPicPath()}" th:alt="${product.get().getPicName()}" class="fixed-height">
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+
+    <!--가격표-->
+
+        <div class="card mb-4 shadow-sm" >
+            <form th:action="@{/prodDelete/{id}(id=${product.get().getId()})}" method="post">
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title" th:text="${#numbers.formatInteger(product.get().getPrice(),3,'COMMA')+'원'}"></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>모바일 청첩장 제공</li>
+                    <li>공유하기 기능 제공</li>
+                    <li th:text="|${'종이 청첩장 '+product.get().getQuantity()+'장 제공'}|"></li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">구매 하기</button>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='main'">메인 페이지</button>
+                <a th:href="@{/productUpdate/{id}(id=${product.get().getId()})}" class="btn btn-lg btn-block btn-outline-primary float-end mx-1">상품 수정</a>
+                <button type="submit" class="btn btn-lg btn-block btn-outline-primary float-end">상품 삭제</button>
+            </div>
+            </form>
+        </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+</html>

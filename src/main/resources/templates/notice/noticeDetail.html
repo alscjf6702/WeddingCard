@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+
+<th:block th:replace="layouts/config ::config"/>
+
+<body class="bg-light">
+<th:block th:replace="layouts/header :: header"/>
+
+<div class="container">
+<p th:text="${detail.getTitle()}"></p>
+</div>
+
+
+<th:block th:replace="layouts/footer :: footer"/>
+</body>
+</html>

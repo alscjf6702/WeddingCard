@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+<th:block th:replace="layouts/config :: config"/>
+<body class="bg-light">
+<th:block th:replace="layouts/header :: header"></th:block>
+
+<div class="container">
+
+    <table class="table table-hover" >
+        <thead>
+        <tr>
+            <td>글번호</td>
+            <td>제목</td>
+            <td>작성일</td>
+            <td>조회수</td>
+        </tr>
+        </thead>
+        <tbody th:each="list : ${list}" th:onclick="|location.href='@{/notice/detail(id=${list.getId()})}'|">
+        <tr>
+            <td th:text="${list.getId()}"></td>
+            <td th:text="${list.getTitle()}"></td>
+<!--            <td><a th:href="@{notice/detail(id=${list.getId()})}" th:text="${list.getTitle()}"></a></td>-->
+            <td th:text="${list.getCreateDate() != null ? #dates.format(list.getCreateDate(),'yyyy-MM-dd HH:mm') : ''}"></td>
+            <td th:text="${list.getReadCount()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+<hr/>
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item" th:each = "i : ${#numbers.sequence(0, page.totalPages -1)}">
+                <a class="page-link" th:href="@{/notice/list(page=${i}, size=${page.size})}" th:text="${i+1}">1</a>
+            </li>
+        </ul>
+    </div>
+
+    <a href="../notice/regNotice" class="btn btn-info">글쓰기</a>
+    
+</div>
+
+<th:block th:replace="layouts/footer :: footer"/>
+</body>
+</html>

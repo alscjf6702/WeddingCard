@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 등록</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<th:block th:replace="layouts/config :: config"/>
+<th:block th:replace="layouts/header :: header"/>
+<body class="bg-light">
+
+
+<div class="container">
+    <h2 class="text-center mt-5">상품 수정</h2>
+    <form th:action="@{/productUpdate/{id}(id=${product.get().getId()})}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="picPath" th:value="${product.get().getPicPath()}">
+        <input type="hidden" name="picName" th:value="${product.get().getPicName()}">
+        <img class="fixed-height"  th:src="${product.get().getPicPath()}" th:alt="${product.get().getPicName()}">
+        <div class="form-group">
+            <label for="productName">상품명</label>
+            <input type="text" class="form-control" id="productName" name="productName" th:value="${product.get().getProductName()}" required >
+        </div>
+        <div class="form-group">
+            <label for="productCode">상품 코드</label>
+            <input type="text" class="form-control" id="productCode" name="productCode" th:value="${product.get().getProductCode()}" required >
+        </div>
+        <div class="form-group">
+            <label for="price">가격</label>
+            <input type="number" class="form-control" id="price" name="price" th:value="${product.get().getPrice()}" required >
+        </div>
+        <div class="form-group">
+            <label for="discount">할인률 (%)</label>
+            <input type="number" class="form-control" id="discount" name="discount" th:value="${product.get().getDiscount()}" >
+        </div>
+        <div class="form-group">
+            <label for="quantity">수량</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" th:value="${product.get().getQuantity()}" >
+        </div>
+        <div class="form-group">
+            <label for="picName">청첩장 이미지</label>
+            <input type="file" class="form-control-file" id="picName" name="picName">
+        </div>
+
+        <button type="submit" class="btn btn-custom">수정</button>
+        <a href="/main" class="btn btn-info">메인페이지</a>
+    </form>
+</div>
+
+
+<th:block th:replace="layouts/footer :: footer"/>
+</body>
+</html>
+
+
