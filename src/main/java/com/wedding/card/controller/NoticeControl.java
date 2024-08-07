@@ -4,6 +4,7 @@ import com.wedding.card.dto.NoticeDTO;
 import com.wedding.card.entity.Notice;
 import com.wedding.card.service.NoticeService;
 import jakarta.persistence.Id;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,11 @@ public class NoticeControl {
     }
 
     @GetMapping("/regNotice")
-    public String regNotice() {
+    public String regNotice(@RequestParam(value = "page" , required = false) Integer page,
+                            @RequestParam(value = "size" , required = false)Integer size,
+                            Model model) {
+        model.addAttribute("page", page);
+        model.addAttribute("size", size);
 
         return "/notice/regNotice";
     }
@@ -43,13 +48,27 @@ public class NoticeControl {
     @PostMapping("/regNotice")
     public String regNoticePost(NoticeDTO dto) {
         noticeService.writeNotice(dto);
+
         return "redirect:/notice/list";
     }
 
 
     @GetMapping("/detail")
-    public String noticeDetail(@RequestParam("id") Long id,Model model){
+    public String noticeDetail(@RequestParam("id") Long id, @RequestParam(value = "page" , required = false) Integer page,
+                               @RequestParam(value = "size" , required = false)Integer size, Model model){
+
+        log.info("페이지 : " + page);
+        log.info("페이지 : " + size);
+        model.addAttribute("page", page);
+        model.addAttribute("size", size);
         model.addAttribute("detail", noticeService.findDetail(id));
         return "/notice/noticeDetail";
     }
+
+    @PostMapping("/delete")
+    public String deleteNotice(@RequestParam("id") Long id){
+        noticeService.deleteNotice(id);
+        return "redirect:/notice/list";
+    }
+
 }

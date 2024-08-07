@@ -48,4 +48,10 @@ public class NoticeService {
         }
     }
 
+    public void deleteNotice(Long id){
+        noticeRepository.deleteById(id);
+
+    }
+
+
 }
