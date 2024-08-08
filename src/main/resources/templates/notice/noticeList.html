@@ -14,18 +14,20 @@
             <td>제목</td>
             <td>작성일</td>
             <td>조회수</td>
-            <td></td>
         </tr>
         </thead>
         <tbody>
         <tr th:each="list : ${list}"  th:onclick="|location.href='@{/notice/detail(id=${list.getId()})}'|">
-            <td th:text="${list.getId()}"></td>
+            <td>
+                <span th:if="${list.getRequired() == 0}" th:text="${list.getId()}"></span>
+                <span th:if="${list.getRequired() == 1}" th:text="중요"></span>
+                <span th:if="${list.getRequired() == 2}" th:text="매우중요"></span>
+            </td>
+
             <td th:text="${list.getTitle()}"></td>
 <!--            <td><a th:href="@{notice/detail(id=${list.getId()})}" th:text="${list.getTitle()}"></a></td>-->
             <td th:text="${list.getCreateDate() != null ? #dates.format(list.getCreateDate(),'yyyy-MM-dd HH:mm') : ''}"></td>
             <td th:text="${list.getReadCount()}"></td>
-
-
         </tr>
         </tbody>
     </table>

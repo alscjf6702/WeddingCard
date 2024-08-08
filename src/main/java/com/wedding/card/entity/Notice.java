@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @RequiredArgsConstructor
@@ -39,6 +40,16 @@ public class Notice {
     @PrePersist
     protected void onCreate(){
         this.createDate = new Timestamp(System.currentTimeMillis());
+    }
+
+    public void update(String title, String content, int required) {
+        this.title = title;
+        this.content = content;
+        this.required = required;
+    }
+
+    public void plusReadCount() {
+        this.readCount++;
     }
 
 }

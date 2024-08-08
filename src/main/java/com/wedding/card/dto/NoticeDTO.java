@@ -22,7 +22,7 @@ public class NoticeDTO {
     private int readCount;  //조회수
 
     private int required;  //중요도 (0~2)
-
+    
     private String picPath;     //사진경로
 
     private String picName;     //사진이름
