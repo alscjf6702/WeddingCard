@@ -3,13 +3,9 @@ package com.wedding.card.controller;
 import com.wedding.card.dto.NoticeDTO;
 import com.wedding.card.entity.Notice;
 import com.wedding.card.service.NoticeService;
-import jakarta.persistence.Id;
-import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/notice")
-public class NoticeControl {
+public class NoticeController {
 
     private final NoticeService noticeService;
 

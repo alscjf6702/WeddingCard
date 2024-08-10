@@ -3,6 +3,7 @@ package com.wedding.card.dto;
 import jakarta.persistence.Column;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,20 +14,20 @@ import java.util.Date;
 @ToString
 public class MemberDTO {
 
-    private String MemberNo;
+    private int MemberNo;
 
-    private String MemberId;
+    private String username;
 
-    private String MemberName;
+    private String memberName;
 
-    private String MemberPwd;
+    private String memberPwd;
 
-    private String MemberAddress;
+    private String memberAddress;
 
     private String phoneNum;
 
     private String email;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
 
     private Date regDate;

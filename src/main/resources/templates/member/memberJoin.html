@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+
+<th:block th:replace="layouts/config :: config"/>
+<body class="bg-light">
+<th:block th:replace="layouts/header::header"/>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" th:src="@{/assets/bluebirdLogo2.png}" alt="" width="72" height="72">
+        <h2>회원 가입</h2>
+    </div>
+
+    <div class="row fs-3">
+        <div class="col-md-12 order-md-1">
+            <form class="needs-validation" novalidate="" th:action="@{/member/join}" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="username">ID</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            ID를 입력해주세요.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="memberPwd">패스워드</label>
+                        <input type="text" class="form-control" id="memberPwd" name="memberPwd" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            패스워드를 입력해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="memberName">이름</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="Username" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            이름을 입력해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Email을 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="memberAddress">주소</label>
+                    <input type="text" class="form-control" id="memberAddress" name="memberAddress" placeholder="1234 Main St" required="">
+                    <div class="invalid-feedback">
+                        주소를 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phoneNum">전화번호</label>
+                    <input type="text" class="form-control" id="phoneNum" name="phoneNum" placeholder="010-0000-0000">
+                    <div class="invalid-feedback">
+                        전화번호를 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="birth">생년월일</label>
+                    <input type="text" class="form-control" id="birth" name="birth" placeholder="2024-08-10">
+                    <div class="invalid-feedback">
+                        생년월일을 입력해주세요.
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">회원 가입</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017-2024 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+
+<script src="form-validation.js"></script>
+
+
+
+
+<th:block th:replace="layouts/footer::footer"/>
+</body>
+</html>

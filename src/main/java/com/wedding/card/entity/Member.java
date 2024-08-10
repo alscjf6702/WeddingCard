@@ -3,12 +3,14 @@ package com.wedding.card.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Getter
-@Builder
+@Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
@@ -19,19 +21,19 @@ public class Member {
     private Long id;
 
     @Column(nullable = false)
-    private String MemberNo;
+    private int memberNo;
 
     @Column(nullable = false)
-    private String MemberId;
+    private String username;
 
     @Column(nullable = false)
-    private String MemberName;
+    private String memberName;
 
     @Column(nullable = false)
-    private String MemberPwd;
+    private String memberPwd;
 
     @Column(nullable = false)
-    private String MemberAddress;
+    private String memberAddress;
 
     @Column(nullable = false)
     private String phoneNum;
@@ -39,14 +41,20 @@ public class Member {
     @Column(nullable = false)
     private String email;
 
+    private String role;
+
     private Date birth;
 
-    @Column(updatable = false)
     private Date regDate;
 
-    @ColumnDefault("1") //1=활동 / 0=휴면
+    @ColumnDefault("0") //0=활동 / 1=휴면
     private int stopMember;
 
+
+    @PrePersist
+    protected void onCreate(){
+        this.regDate = new Timestamp(System.currentTimeMillis());
+    }
 
 
 
