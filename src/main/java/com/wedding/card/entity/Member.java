@@ -43,6 +43,7 @@ public class Member {
 
     private String role;
 
+    @Column(nullable = false)
     private Date birth;
 
     private Date regDate;
