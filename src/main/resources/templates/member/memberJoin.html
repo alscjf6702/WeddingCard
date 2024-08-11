@@ -64,14 +64,15 @@
 
                 <div class="mb-3">
                     <label for="birth">생년월일(필수)</label>
-                    <input id="birth" autocomplete="off" name="birth" width="276" required />
+                    <input id="birth" autocomplete="off" name="birth_display" width="276" class="form-control is-valid" required readonly>
+                    <input type="hidden" id="birth_hidden" name="birth">
                     <div class="invalid-feedback">
-                        0000-00-00 의 형태로 입력해주세요.
+                        생년월일을 입력해주세요.
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="email">Email</label>
+                    <label for="email">Email(옵션)</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
                     <div class="invalid-feedback">
                         Email을 입력해주세요.
@@ -79,13 +80,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="memberAddress">주소</label>
+                    <label for="memberAddress">주소(옵션)</label>
                     <input type="text" class="form-control" id="memberAddress" name="memberAddress" placeholder="경기도 수원시">
                     <div class="invalid-feedback">
                         주소를 입력해주세요.
                     </div>
                 </div>
-                
+
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block joinBtn" type="submit">회원 가입</button>
             </form>
@@ -95,17 +96,66 @@
 
 </div>
 
-<script>
-    $('#birth').datepicker({
-        uiLibrary: 'bootstrap5',
-        format: 'yyyy-mm-dd'
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="/static/js/jquery.slim.min.js"><\/script>')</script>
-<script src="/static/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
-<script src="/static/js/form-validation.js"></script>
+<script>
+$('#birth').datepicker({
+uiLibrary: 'bootstrap5',
+format: 'yyyy-mm-dd',
+change: function (e) {
+$('#birth_hidden').val($(this).val());  // hidden 필드에 값을 설정
+}
+});
+
+document.querySelector('.joinBtn').addEventListener('click', function(event) {
+const birthInput = document.querySelector('#birth');
+const usernameInput = document.querySelector('#username');
+const memberPwdInput = document.querySelector('#memberPwd');
+const memberNameInput = document.querySelector('#memberName');
+const phoneNumInput = document.querySelector('#phoneNum');
+if(!usernameInput.value){
+event.preventDefault();
+alert('ID를 입력해주세요');
+document.querySelector('#username').focus();
+return;
+}
+
+if(!memberPwdInput.value){
+event.preventDefault();
+alert('패스워드를 입력해주세요.');
+document.querySelector('#memberPwd').focus();
+return;
+}
+
+if(!memberNameInput.value){
+event.preventDefault();
+alert('성함을 입력해주세요.');
+document.querySelector('#memberName').focus();
+return;
+}
+
+if(!phoneNumInput.value){
+event.preventDefault();
+alert('전화번호를 입력해주세요');
+document.querySelector('#phoneNum').focus();
+return;
+}
+
+
+if (!birthInput.value) {
+event.preventDefault(); // 폼 제출 방지
+alert('생년월일을 선택해주세요');
+document.querySelector('#birth').focus();
+} else {
+birthInput.setCustomValidity(''); // 오류 메시지 초기화
+}
+});
+</script>
+<!--<script src="/static/js/form-validation.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<!--<script>window.jQuery || document.write('<script src="/static/js/jquery.slim.min.js"><\/script>')</script>-->
+<!--<script src="/static/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>-->
+
+
 <th:block th:replace="layouts/footer::footer"/>
 </body>
 </html>
