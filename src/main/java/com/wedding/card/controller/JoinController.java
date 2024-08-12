@@ -19,14 +19,14 @@ public class JoinController {
     }
 
     @GetMapping("/join")
-    public String joinMember(){
+    public String joinMember() {
 
         return "/member/memberJoin";
     }
 
 
     @PostMapping("/join")
-    public String joinProcess(@ModelAttribute MemberDTO memberDTO, Model model){
+    public String joinProcess(@ModelAttribute MemberDTO memberDTO, Model model) {
         try {
             joinService.joinProcess(memberDTO);
             return "redirect:/main";
@@ -36,5 +36,8 @@ public class JoinController {
         }
     }
 
-
+    @GetMapping("/login")
+    public String login(){
+        return "/member/login";
+    }
 }
