@@ -13,16 +13,43 @@
     <hr/>
 <p class="fs-4 my-5" th:text="${detail.getContent()}"></p>
 
-    <form th:action="@{/notice/delete(id=${detail.getId()})}" method="post">
+    <form id="deleteForm" th:action="@{/notice/delete(id=${detail.getId()})}" method="post">
         <input type="hidden" name="page" value="${page}">
         <input type="hidden" name="size" value="${size}">
 
-        <button type="submit" class="btn btn-danger">삭제</button>
+        <button type="submit" class="btn btn-danger deleteBtn">삭제</button>
         <a th:href="@{/notice/updateNotice(id=${detail.getId()})}" class="btn btn-info">수정</a>
         <a th:href="@{/notice/list(page=${page},size=${size})}" class="btn btn-warning">뒤로가기</a>
     </form>
 </div>
 
+
+
 <th:block th:replace="layouts/footer :: footer"/>
+
+<script>
+    document.querySelector('.deleteBtn').addEventListener('click', function(event){
+        event.preventDefault();
+
+        // 팝업 창 열기
+        const popup = window.open('', 'deletePopup', 'width=400px,height=200px');
+        popup.document.write(`
+            <h2>삭제 확인</h2>
+            <p>삭제하려면 "삭제"라고 입력하세요:</p>
+            <input type="text" id="deleteInput">
+            <button onclick="window.opener.confirmDelete(document.getElementById('deleteInput').value); window.close();">확인</button>
+            <button onclick="window.close();">취소</button>
+        `);
+    });
+
+    function confirmDelete(inputValue) {
+        if (inputValue === '삭제') {
+            document.getElementById('deleteForm').submit();
+        } else {
+            alert('삭제를 원하시면 "삭제"라고 입력하세요.');
+        }
+    }
+</script>
+
 </body>
 </html>
