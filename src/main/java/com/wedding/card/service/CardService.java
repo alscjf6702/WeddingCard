@@ -122,14 +122,14 @@ public class CardService {
                 System.out.println("저장된 경로"+savedPath);
                 System.out.println("새로운 경로"+cardDTO.getPicPath());
                 // 파일 삭제
-                File file = new File(System.getProperty("user.dir") + "/src/main/resources/static" + savedPath);
-                if (file.exists()) {
-                    if (file.delete()) {
-                        System.out.println("파일 삭제 완료");
-                    } else {
-                        System.out.println("파일 삭제 실패");
-                    }
-                }
+//                File file = new File(System.getProperty("user.dir") + "/src/main/resources/static" + savedPath);
+//                if (file.exists()) {
+//                    if (file.delete()) {
+//                        System.out.println("파일 삭제 완료");
+//                    } else {
+//                        System.out.println("파일 삭제 실패");
+//                    }
+//                }
             card = Card.builder()
                     .id(id)
                     .productName(cardDTO.getProductName())

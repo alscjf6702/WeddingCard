@@ -21,7 +21,9 @@
         <div class="card mb-4 shadow-sm" >
             <form th:action="@{/prodDelete/{id}(id=${product.get().getId()})}" method="post">
             <div class="card-body">
-                <h1 class="card-title pricing-card-title" th:text="${#numbers.formatInteger(product.get().getPrice(),3,'COMMA')+'원'}"></h1>
+                <h1 class="card-title pricing-card-title" th:text="${#numbers.formatInteger(product.get().getPrice(),3,'COMMA')+'원 - > '
+                + #numbers.formatInteger(T(java.lang.Math).round((((100-product.get().getDiscount)/100.0)*product.get().getPrice())),3,'COMMA')+'원'}"></h1>
+
                 <ul class="list-unstyled mt-3 mb-4">
                     <li>모바일 청첩장 제공</li>
                     <li>공유하기 기능 제공</li>
