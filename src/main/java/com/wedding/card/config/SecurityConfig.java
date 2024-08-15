@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,42 +31,34 @@ public class SecurityConfig {
     }
 
     @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+
+        http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+                        .requestMatchers("/css/**","/js/**","/main","/member/login", "/member/join", "/assets/**","/uploads/**","/notice/list","/productDetail","/notice/detail").permitAll()
+                        .anyRequest().authenticated())
+
+                .csrf((csrf) -> csrf.disable())
+                .formLogin((formLogin) -> formLogin
+                        .loginPage("/member/login")
+                        .passwordParameter("memberPwd")
+                        .defaultSuccessUrl("/main", true))
+
+                    .logout(logout -> logout
+                        .logoutUrl("/member/logout")
+                        .logoutSuccessUrl("/main")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"));
+
+
+        http.sessionManagement((session) -> session
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+
+        return http.build();
+    }
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-
-        //csrf disable
-        http.csrf((auth) -> auth.disable());
-        //form 로그인 방식
-//        http.formLogin((auth) -> auth.disable());
-
-        http.formLogin((auth) -> auth
-                .loginPage("/member/login")
-                .defaultSuccessUrl("/main")
-                .permitAll());
-
-        //http basic 인증 방식
-        http.httpBasic((auth) -> auth.disable());
-
-        http.authorizeHttpRequests((auth) -> auth
-                .anyRequest().permitAll());
-//                .requestMatchers("/login", "/", "/join", "/main").permitAll()
-//                .requestMatchers("admin").hasRole("ADMIN")
-//                .anyRequest().authenticated());
-
-
-        http
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-//        http
-//                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
-
 
 }

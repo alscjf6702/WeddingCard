@@ -74,7 +74,7 @@ public class JoinService {
         member.setPhoneNum(phoneNum);
         member.setEmail(email);
         member.setBirth(birth);
-        member.setRole("ROLE_ADMIN");
+        member.setRole("ROLE_USER");
 
 
         memberRepository.save(member);

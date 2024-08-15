@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:fragment="header">
-<th:block >
+      th:fragment="header" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<body>
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
@@ -18,8 +18,9 @@
                 <a class="text-muted" href="#" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
                 </a>
-                <a class="btn btn-sm btn-outline-secondary" th:href="@{/member/join}"><b>회원 가입</b></a>
-                <a th:href="@{/member/login}" class="btn btn-sm btn-outline-secondary ms-3"><b>로그인</b></a>
+                <a sec:authorize="isAnonymous()" class="btn btn-sm btn-outline-secondary" th:href="@{/member/join}"><b>회원 가입</b></a>
+                <a sec:authorize="isAnonymous()" th:href="@{/member/login}" class="btn btn-sm btn-outline-secondary ms-3"><b>로그인</b></a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" class="btn btn-sm btn-outline-secondary ms-3"><b>로그아웃</b></a>
             </div>
         </div>
     </header>
@@ -34,6 +35,8 @@
         </nav>
     </div>
 </div>
+
+</body>
     <style>
     .modal{
         position:absolute;
@@ -70,5 +73,4 @@
         transform:translateY(-50%); //모듈창열었을때 위치설정 가운데로
     }
 </style>
-</th:block>
 </html>
