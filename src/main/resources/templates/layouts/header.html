@@ -27,9 +27,9 @@
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted " href="/notice/list"><b>공지사항</b></a>
-            <a class="p-2 text-muted" href="/productReg"><b>상품등록</b></a>
-            <a class="p-2 text-muted" href="#"><b>회원정보</b></a>
+            <a class="p-2 text-muted " th:href="@{/notice/list}"><b>공지사항</b></a>
+            <a sec:authorize="isAuthenticated()" class="p-2 text-muted" href="/productReg"><b>상품등록</b></a>
+            <a class="p-2 text-muted" th:href="@{/member/info}"><b>회원정보</b></a>
             <a class="p-2 text-muted" href="#"><b>QnA</b></a>
             <a class="p-2 text-muted" href="#"><b>고객센터</b></a>
         </nav>
