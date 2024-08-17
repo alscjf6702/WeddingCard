@@ -35,18 +35,21 @@
                 <span th:if="${#strings.isEmpty(member.getEmail())}" class="join-info__text fw-bold"
                       th:text="'이메일을 등록해주세요.'"></span>
                 <span th:if="${!#strings.isEmpty(member.getEmail())}" class="join-info__text fw-bold"
-                      th:text="'이메일을 등록해주세요.'"></span>
+                      th:text="${member.getEmail()}"></span>
             </li>
 
             <li class="join-info__item">
                 <span class=" join-info__tit fw-bold">회원 등급</span>
-                <span th:if="${member.getRole() == 'ROLE_ADMIN'}" class="join-info__text fw-bold" th:text="관리자"></span>
-                <span th:if="${member.getRole() == 'ROLE_USER'}" class="join-info__text fw-bold" th:text="일반 회원"></span>
+                <span th:if="${member.getRole().equals('ROLE_ADMIN')}" class="join-info__text fw-bold" th:text="'관리자'"></span>
+                <span th:if="${member.getRole().equals('ROLE_USER') && member.getStopMember() == 0}" class="join-info__text fw-bold" th:text="'일반 회원'"></span>
+                <span th:if="${member.getStopMember() == 1}" class="join-info__text fw-bold" th:text="'휴면 회원'"></span>
+
             </li>
+
         </ul>
         <hr/>
         <div class="join-info__etc">
-            <button class="btn btn-info">
+            <button class="btn btn-info" onclick="window.location.href='/member/update'">
                 <span>정보 수정</span>
             </button>
             <button class="btn btn-info">

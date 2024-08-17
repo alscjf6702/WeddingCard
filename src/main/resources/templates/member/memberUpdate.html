@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="layouts/config :: config"/>
+<body>
+<th:block th:replace="layouts/header :: header"/>
+<link th:href="@{/css/info.css}" rel="stylesheet"/>
+<div class="container join-info ">
+    <ul class="join-info__list ">
+        <li class="join-info__item">
+            <span class="join-info__tit fw-bold">이름</span>
+            <span class="join-info__text fw-bold" th:text="${member.getMemberName()}"></span>
+        </li>
+        <li class="join-info__item">
+            <span class="join-info__tit fw-bold">가입일자</span>
+            <span class="join-info__text fw-bold" th:text="${#dates.format(member.getRegDate(), 'yyyy.MM.dd')}"></span>
+        </li>
+
+        <li class="join-info__item">
+            <span class=" join-info__tit fw-bold">회원 번호</span>
+            <span class="join-info__text fw-bold" th:text="${member.getMemberNo()}"></span>
+        </li>
+    </ul>
+    <hr>
+    <ul class="join-info__list ">
+        <li class="join-info__item">
+            <span class="join-info__tit fw-bold">생년월일</span>
+            <span class="join-info__text fw-bold" th:text="${#dates.format(member.getBirth(), 'yyyy.MM.dd')}"></span>
+        </li>
+
+        <li class="join-info__item">
+            <span class=" join-info__tit fw-bold">회원 등급</span>
+            <span th:if="${member.getRole().equals('ROLE_ADMIN')}" class="join-info__text fw-bold" th:text="'관리자'"></span>
+            <span th:if="${member.getRole().equals('ROLE_USER') && member.getStopMember() == 0}" class="join-info__text fw-bold" th:text="'일반 회원'"></span>
+            <span th:if="${member.getStopMember() == 1}" class="join-info__text fw-bold" th:text="'휴면 회원'"></span>
+
+        </li>
+    </ul>
+    <hr/>
+    <form th:action="@{/member/update}" method="post">
+        <ul class="join-info__list ">
+            <li class="join-info__item">
+                <span class="join-info__tit fw-bold">email</span>&nbsp;
+                <input type="email" th:if="${#strings.isEmpty(member.getEmail())}" name="email" class="join-info__input fw-bold"
+                       th:placeholder="'이메일을 등록해주세요.'"></input>
+                <input type="email" th:if="${!#strings.isEmpty(member.getEmail())}" name="email" class="join-info__input fw-bold"
+                       th:value="${member.getEmail()}"></input>
+            </li>
+
+            <li class="join-info__item">
+                <span class="join-info__tit fw-bold">주소</span>
+                <input th:if="${!#strings.isEmpty(member.getMemberAddress())}" name="memberAddress" class="join-info__input fw-bold" th:value="${member.getMemberAddress()}"></input>
+                <input th:if="${#strings.isEmpty(member.getMemberAddress())}" name="memberAddress" class="join-info__input fw-bold" th:placeholder="'주소를 입력해주세요.'"></input>
+            </li>
+        </ul>
+        <div class="join-info__etc">
+            <button type="submit" class="btn btn-info">수정 완료</button>
+            <button type="button" class="btn btn-info" onclick="location.href='/member/info'">뒤로 가기</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+<script>
+document.querySelector('form').addEventListener('submit', function(event) {
+    var address = document.querySelector('input[name="memberAddress"]').value;
+    var email = document.querySelector('input[name="email"]').value;
+
+    if (!address) {
+        alert("주소를 입력하세요.");
+    event.preventDefault(); // 폼 제출 방지
+    }
+
+    if(!email){
+        alert("이메일을 입력해주세요.");
+    event.preventDefault();
+    }
+});
+
+
+
+</script>
+</html>

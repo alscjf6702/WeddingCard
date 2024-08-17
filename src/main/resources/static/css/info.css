@@ -33,6 +33,11 @@
     .join-info__item .c-icon--my_phone {
     	margin-top: -0.5rem; }
 
+    .join-info__input{
+        margin-left: 3rem;
+        width : 50%;
+    }
+
     .join-info__text:not(:first-of-type) {
       font-size: 1.0625rem;
       font-weight: 400;

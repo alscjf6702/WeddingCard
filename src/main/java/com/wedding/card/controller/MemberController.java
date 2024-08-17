@@ -1,5 +1,6 @@
 package com.wedding.card.controller;
 
+import com.wedding.card.dto.MemberDTO;
 import com.wedding.card.entity.Member;
 import com.wedding.card.service.InfoService;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
@@ -34,5 +32,24 @@ public class MemberController {
         return "/member/memberInfo";
     }
 
+    @GetMapping("/member/update")
+    public String update(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
 
+        Member member = infoService.findByUsername(username);
+        model.addAttribute("member", member);
+
+        return "/member/memberUpdate";
+    }
+
+    @PostMapping("/member/update")
+    public String doUpdate(MemberDTO memberDTO){
+
+        infoService.updateMember(memberDTO);
+
+        System.out.println(memberDTO.getEmail());
+
+        return "redirect:/member/info";
+    }
 }
