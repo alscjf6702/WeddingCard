@@ -4,41 +4,56 @@
 <th:block th:replace="layouts/config ::config"/>
 <body>
 <th:block th:replace="layouts/header::header"/>
+<link th:href="@{/css/info.css}" rel="stylesheet"/>
 
 <main role="main">
-    <p th:text="${member}"></p>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3" th:text="${member.getMemberName()+'님 안녕하세요?'}"></h1>
-            <p th:text="${member.getMemberNo()+'번 회원님'}"></p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+
+    <div class="container join-info ">
+        <ul class="join-info__list ">
+            <li class="join-info__item">
+                <span class="join-info__tit fw-bold">이름</span>
+                <span class="join-info__text fw-bold" th:text="${member.getMemberName()}"></span>
+            </li>
+            <li class="join-info__item">
+                <span class="join-info__tit fw-bold">가입일자</span>
+                <span class="join-info__text fw-bold" th:text="${#dates.format(member.getRegDate(), 'yyyy.MM.dd')}"></span>
+            </li>
+
+            <li class="join-info__item">
+                <span class=" join-info__tit fw-bold">회원 번호</span>
+                <span class="join-info__text fw-bold" th:text="${member.getMemberNo()}"></span>
+            </li>
+        </ul>
+        <hr>
+        <ul class="join-info__list ">
+            <li class="join-info__item">
+                <span class="join-info__tit fw-bold">생년월일</span>
+                <span class="join-info__text fw-bold" th:text="${#dates.format(member.getBirth(), 'yyyy.MM.dd')}"></span>
+            </li>
+            <li class="join-info__item">
+                <span class="join-info__tit fw-bold">email</span>
+                <span th:if="${#strings.isEmpty(member.getEmail())}" class="join-info__text fw-bold"
+                      th:text="'이메일을 등록해주세요.'"></span>
+                <span th:if="${!#strings.isEmpty(member.getEmail())}" class="join-info__text fw-bold"
+                      th:text="'이메일을 등록해주세요.'"></span>
+            </li>
+
+            <li class="join-info__item">
+                <span class=" join-info__tit fw-bold">회원 등급</span>
+                <span th:if="${member.getRole() == 'ROLE_ADMIN'}" class="join-info__text fw-bold" th:text="관리자"></span>
+                <span th:if="${member.getRole() == 'ROLE_USER'}" class="join-info__text fw-bold" th:text="일반 회원"></span>
+            </li>
+        </ul>
+        <hr/>
+        <div class="join-info__etc">
+            <button class="btn btn-info">
+                <span>정보 수정</span>
+            </button>
+            <button class="btn btn-info">
+                <span>회원 정보 삭제</span>
+            </button>
         </div>
     </div>
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Will you do the same for me? It's time to face the music I'm no longer your muse. Heard it's beautiful, be the judge and my girls gonna take a vote. I can feel a phoenix inside of me. Heaven is jealous of our love, angels are crying from up above. Yeah, you take me to utopia.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Standing on the frontline when the bombs start to fall. Heaven is jealous of our love, angels are crying from up above. Can't replace you with a million rings. Boy, when you're with me I'll give you a taste. There’s no going back. Before you met me I was alright but things were kinda heavy. Heavy is the head that wears the crown.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Playing ping pong all night long, everything's all neon and hazy. Yeah, she's so in demand. She's sweet as pie but if you break her heart. But down to earth. It's time to face the music I'm no longer your muse. I guess that I forgot I had a choice.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-            </div>
-        </div>
-
-        <hr>
-
-    </div> <!-- /container -->
 
 </main>
 
