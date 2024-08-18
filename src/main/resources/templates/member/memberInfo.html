@@ -52,13 +52,40 @@
             <button class="btn btn-info" onclick="window.location.href='/member/update'">
                 <span>정보 수정</span>
             </button>
-            <button class="btn btn-info">
-                <span>회원 정보 삭제</span>
+            <button  class="btn btn-info dltBtn">
+                <span>회원 탈퇴</span>
             </button>
         </div>
     </div>
 
 </main>
+<script>
+    document.querySelector('.dltBtn').addEventListener('click', function(event) {
+       const userConfirmation = prompt("회원 탈퇴를 진행하려면 '삭제'라고 입력해주세요.");
 
+       if (userConfirmation === '삭제') {
+           alert('회원 탈퇴가 진행됩니다.');
+
+           // 동적으로 폼을 생성하여 POST 요청을 전송
+           const form = document.createElement('form');
+           form.method = 'POST';
+           form.action = '/member/delete'; // 실제 탈퇴 요청을 처리하는 URL
+
+           // CSRF 토큰이 필요할 경우
+<!--           const csrfToken = document.querySelector('meta[name="_csrf"]').content; // 메타 태그에서 CSRF 토큰 가져오기-->
+<!--           const csrfInput = document.createElement('input');-->
+<!--           csrfInput.type = 'hidden';-->
+<!--           csrfInput.name = '_csrf';-->
+<!--           csrfInput.value = csrfToken;-->
+<!--           form.appendChild(csrfInput);-->
+
+           document.body.appendChild(form);
+           form.submit();
+       } else {
+           alert('회원 탈퇴가 취소되었습니다.');
+       }
+   });
+
+</script>
 </body>
 </html>

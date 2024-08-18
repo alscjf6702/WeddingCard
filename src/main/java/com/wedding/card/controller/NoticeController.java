@@ -1,12 +1,16 @@
 package com.wedding.card.controller;
 
 import com.wedding.card.dto.NoticeDTO;
+import com.wedding.card.entity.Member;
 import com.wedding.card.entity.Notice;
+import com.wedding.card.service.InfoService;
 import com.wedding.card.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,18 +20,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Log4j2
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/notice")
+@RequiredArgsConstructor
 public class NoticeController {
 
     private final NoticeService noticeService;
 
+    private final InfoService infoService;
+
     @GetMapping("/list")
-    public String noticeList(Model model, Pageable pageable) {
+    public String noticeList(Pageable pageable, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Member member = infoService.findByUsername(username);
+
 
         Page<Notice> page = noticeService.noticeList(pageable);
+
         model.addAttribute("list", page.getContent());
         model.addAttribute("page", page);
+        model.addAttribute("member", member);
 
         return "/notice/noticeList";
     }

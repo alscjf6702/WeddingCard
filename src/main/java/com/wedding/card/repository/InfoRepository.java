@@ -7,4 +7,5 @@ public interface InfoRepository extends JpaRepository<Member, Long> {
 
     <Optional>Member findByUsername(String username);
 
+
 }

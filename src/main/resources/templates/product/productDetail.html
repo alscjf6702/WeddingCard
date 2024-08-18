@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <th:block th:replace="layouts/config::config"/>
 
@@ -30,8 +30,8 @@
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-primary">구매 하기</button>
                 <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='main'">메인 페이지</button>
-                <a th:href="@{/productUpdate/{id}(id=${product.get().getId()})}" class="btn btn-lg btn-block btn-outline-primary float-end mx-1">상품 수정</a>
-                <button type="submit" class="btn btn-lg btn-block btn-outline-primary float-end">상품 삭제</button>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/productUpdate/{id}(id=${product.get().getId()})}" class="btn btn-lg btn-block btn-outline-primary float-end mx-1">상품 수정</a>
+                <button sec:authorize="hasRole('ROLE_ADMIN')" type="submit" class="btn btn-lg btn-block btn-outline-primary float-end">상품 삭제</button>
             </div>
             </form>
         </div>

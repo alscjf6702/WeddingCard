@@ -33,11 +33,7 @@ public class MemberSecurityService implements UserDetailsService {
 
         Member member = _member.get();
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if ("admin".equals(username)) {
-            authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
-        }else {
-            authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
-        }
+        authorities.add(new SimpleGrantedAuthority(member.getRole()));
 
         return new User(member.getUsername(),member.getMemberPwd(),authorities);
     }
