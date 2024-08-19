@@ -61,9 +61,9 @@
 </main>
 <script>
     document.querySelector('.dltBtn').addEventListener('click', function(event) {
-       const userConfirmation = prompt("회원 탈퇴를 진행하려면 '삭제'라고 입력해주세요.");
+       const userConfirmation = prompt("회원 탈퇴를 진행하려면 '탈퇴'라고 입력해주세요.");
 
-       if (userConfirmation === '삭제') {
+       if (userConfirmation === '탈퇴') {
            alert('회원 탈퇴가 진행됩니다.');
 
            // 동적으로 폼을 생성하여 POST 요청을 전송
@@ -81,6 +81,8 @@
 
            document.body.appendChild(form);
            form.submit();
+           alert('회원 탈퇴가 완료되었습니다');
+
        } else {
            alert('회원 탈퇴가 취소되었습니다.');
        }
