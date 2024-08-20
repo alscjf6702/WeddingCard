@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <th:block th:replace="layouts/config::config"/>
 
 <body class="bg-light">
@@ -28,7 +28,9 @@
                     <li>공유하기 기능 제공</li>
                     <li th:text="|${'종이 청첩장 '+product.get().getQuantity()+'장 제공'}|"></li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">구매 하기</button>
+
+                <button type="button" class="btn-purchase btn btn-lg btn-block btn-outline-primary btn-purchase">구매 하기</button>
+
                 <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='main'">메인 페이지</button>
                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/productUpdate/{id}(id=${product.get().getId()})}" class="btn btn-lg btn-block btn-outline-primary float-end mx-1">상품 수정</a>
                 <button sec:authorize="hasRole('ROLE_ADMIN')" type="submit" class="btn btn-lg btn-block btn-outline-primary float-end">상품 삭제</button>
@@ -38,9 +40,34 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
+<script th:inline="javascript">
+    // 상품 가격 계산
+    const finalPrice = /*[[${((100-product.get().getDiscount())/100.0) * product.get().getPrice()}]]*/ 0;
+
+    // 아임포트 초기화
+    IMP.init("imp63736637");
+
+    function requestPayment() {
+        IMP.request_pay({
+            pg: "danal_tpay.9810030929",
+            pay_method: "card",
+            merchant_uid: `payment-${crypto.randomUUID()}`, // 주문 고유 번호
+            name: /*[[${product.get().getProductName()}]]*/, // 상품 이름
+            amount: finalPrice // 상품 가격
+        }, function (response) {
+            // 결제 종료 시 호출되는 콜백 함수
+            if (response.success) {
+                alert('결제가 성공적으로 완료되었습니다.');
+            } else {
+                alert(`결제에 실패하였습니다. 오류 메시지: ${response.error_msg}`);
+            }
+        });
+    }
+
+    // 구매하기 버튼 클릭 시 결제 요청 실행
+    document.querySelector('.btn-purchase').addEventListener('click', requestPayment);
+</script>
 
 
 

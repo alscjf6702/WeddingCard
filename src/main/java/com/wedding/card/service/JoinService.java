@@ -1,20 +1,14 @@
 package com.wedding.card.service;
 
-import com.wedding.card.config.DateFormatter;
 import com.wedding.card.dto.MemberDTO;
 import com.wedding.card.entity.Member;
-import com.wedding.card.repository.InfoRepository;
 import com.wedding.card.repository.MemberRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 @Service
 public class JoinService {
@@ -82,7 +76,6 @@ public class JoinService {
 
         memberRepository.save(member);
     }
-
 
 
 

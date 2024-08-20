@@ -3,6 +3,8 @@ package com.wedding.card.controller;
 import com.wedding.card.dto.CardDTO;
 import com.wedding.card.entity.Card;
 import com.wedding.card.service.CardService;
+import com.wedding.card.service.InfoService;
+import com.wedding.card.service.JoinService;
 import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +26,8 @@ import java.util.UUID;
 public class WeddingController {
 
     private final CardService cardService;
+
+    private final InfoService infoService;
 
     @GetMapping("/main")
     public String mainPage(Model model) {
