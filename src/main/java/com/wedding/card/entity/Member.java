@@ -6,7 +6,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -51,6 +53,8 @@ public class Member {
     @ColumnDefault("0") //0=활동 / 1=휴면
     private int stopMember;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     @PrePersist
     protected void onCreate(){
