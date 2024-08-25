@@ -4,6 +4,7 @@ import com.wedding.card.dto.OrderDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -33,7 +34,7 @@ public class Order {
     private int amount; // 결제 금액
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn(name = "member_id", nullable = true)
     private Member member; // 주문한 회원 정보와의 관계
 
     @Column(nullable = false)
@@ -41,6 +42,12 @@ public class Order {
 
     @Column(nullable = false)
     private LocalDateTime orderDate; // 주문 일자
+
+    @PrePersist
+    protected void onCreate(){
+        this.orderDate = LocalDateTime.now();
+    }
+
 
     public OrderDTO toDTO(Order order){ //entity to dto
         return OrderDTO.builder()

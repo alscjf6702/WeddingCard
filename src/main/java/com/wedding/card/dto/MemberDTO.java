@@ -24,6 +24,8 @@ public class MemberDTO {
 
     private String memberAddress;
 
+    private String orderState;
+
     private String phoneNum;
 
     private String email;

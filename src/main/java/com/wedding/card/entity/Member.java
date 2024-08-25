@@ -45,6 +45,8 @@ public class Member {
 
     private String role;
 
+    private String orderState;
+
     @Column(nullable = false)
     private Date birth;
 

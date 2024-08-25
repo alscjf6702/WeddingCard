@@ -4,15 +4,14 @@ package com.wedding.card.dto;
 import com.wedding.card.entity.Member;
 import com.wedding.card.entity.Order;
 import com.wedding.card.repository.MemberRepository;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

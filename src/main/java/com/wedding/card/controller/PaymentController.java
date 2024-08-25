@@ -25,6 +25,7 @@ public class PaymentController {
             orderService.createOrder(orderDTO);
             return ResponseEntity.ok().body(Collections.singletonMap("success", true));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("success", false));
         }
     }

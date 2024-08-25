@@ -8,6 +8,8 @@ import com.wedding.card.service.JoinService;
 import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +59,13 @@ public class WeddingController {
     @GetMapping("/productDetail")
     public String productDetail(Model model, @RequestParam("id") Long id) {
         model.addAttribute("product",cardService.prodDetail(id));
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        model.addAttribute( "member",infoService.findByUsername(username));
+        System.out.println("으아아아아아아ㅏ" + infoService.findByUsername(username));
+
         return "/product/productDetail";
     }
 

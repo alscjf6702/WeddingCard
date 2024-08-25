@@ -3,9 +3,12 @@ package com.wedding.card.service;
 import com.wedding.card.dto.OrderDTO;
 import com.wedding.card.entity.Member;
 import com.wedding.card.entity.Order;
+import com.wedding.card.repository.InfoRepository;
 import com.wedding.card.repository.MemberRepository;
 import com.wedding.card.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,6 +21,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     private final MemberRepository memberRepository;
+
+    private final InfoRepository infoRepository;
 
     public Order toOrder(OrderDTO orderDTO) {       //DTO to Entity
 
@@ -39,8 +44,12 @@ public class OrderService {
 
 
     public void createOrder(OrderDTO orderDTO) {
-        Member member = memberRepository.findById(orderDTO.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Member member = infoRepository.findByUsername(username);
+
 
         Order order = Order.builder()
                 .orderDate(LocalDateTime.now())
@@ -51,6 +60,8 @@ public class OrderService {
                 .member(member)
                 .impUid(orderDTO.getImpUid())
                 .build();
+
+        member.setOrderState("paid");
 
         orderRepository.save(order);
     }
