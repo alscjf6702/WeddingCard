@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@ToString
+@ToString(exclude = "orders")
 public class Member {
 
     @Id
@@ -45,6 +45,7 @@ public class Member {
 
     private String role;
 
+    @Column(nullable = true)
     private String orderState;
 
     @Column(nullable = false)

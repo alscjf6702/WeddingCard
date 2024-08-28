@@ -11,7 +11,6 @@ import java.util.Date;
 @Entity
 @Getter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
@@ -42,6 +41,9 @@ public class Order {
 
     @Column(nullable = false)
     private LocalDateTime orderDate; // 주문 일자
+
+    @Column(nullable = true)
+    private String productCode;
 
     @PrePersist
     protected void onCreate(){

@@ -84,7 +84,6 @@ public class WeddingController {
     }
 
 
-    //update 아직 안됨 , update 메서드 만들어야 함
     @PostMapping("/productUpdate/{id}")
     public String productUpdatePost(@PathVariable("id")Long id, @ModelAttribute CardDTO cardDTO, @RequestParam(value = "picName", required = false) MultipartFile picName) throws IOException {
             cardService.updateProd(cardDTO, picName, id);
@@ -94,15 +93,5 @@ public class WeddingController {
     }
 
 
-//    @PostMapping("/productUpdate/{id}")
-//    public String productUpdatePost(@PathVariable("id")Long id, @ModelAttribute CardDTO cardDTO ,@RequestParam("picName") MultipartFile picName) throws IOException {
-//        if (!picName.isEmpty()) {
-//            cardService.regProd(cardDTO, picName);
-//        }else {
-//            cardService.regProd(cardDTO);
-//        }
-//
-//        return "redirect:/main";
-//    }
 
 }

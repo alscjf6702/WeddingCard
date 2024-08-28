@@ -46,6 +46,7 @@
     const finalPrice = /*[[${((100-product.get().getDiscount())/100.0) * product.get().getPrice()}]]*/ 0;
     const username = /* [[${member.getUsername()}]] */ 0;
     const memberName = /* [[${member.getMemberName()}]] */ 0;
+    const productCode = /*[[${product.get().getProductCode()}]]*/ 0;
     // 아임포트 초기화
     IMP.init("imp63736637");
 
@@ -57,6 +58,7 @@
             name: /*[[${product.get().getProductName()}]]*/, // 상품 이름
             amount: finalPrice, // 상품 가격
             buyer_name: memberName
+
         }, function (response) {
             if (response.success) {
                         console.log('imp_uid : '+response.imp_uid);
@@ -76,6 +78,7 @@
                         paymentStatus: response.status,
                         memberId: username,
                         productName: response.name,
+                        productCode: productCode
                     })
                 }).then(res => res.json())
                   .then(data => {

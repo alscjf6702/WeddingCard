@@ -57,10 +57,24 @@ public class MemberController {
     }
 
     @PostMapping("/member/delete")
-    public String delete(MemberDTO dto, HttpServletResponse response, HttpServletRequest request){
+    public String delete(MemberDTO dto, HttpServletResponse response, HttpServletRequest request) {
 
         infoService.DeleteMember(dto, request, response);
         return "redirect:/main";
+
+    }
+
+
+    @GetMapping("/member/purchasedProduct")
+    public String purchasedProduct(Model model){
+
+         if (infoService.purchasedProduct() != null) {
+            model.addAttribute("purchasedProduct", infoService.purchasedProduct());
+            return "/member/purchasedProduct";
+        }else{
+             model.addAttribute("nothingPurchased", "구매 내역이 없습니다.");
+             return "/member/purchasedProduct";
+         }
 
     }
 }

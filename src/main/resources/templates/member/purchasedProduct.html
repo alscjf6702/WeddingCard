@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="layouts/config :: config"/>
+<body>
+<th:block th:replace="layouts/header :: header"/>
+
+<div class="container">
+
+    <div th:if="${purchasedProduct}">
+
+        <span th:text="${purchasedProduct.getProductName()}"></span>
+        <img th:src="${purchasedProduct.getPicPath()}" class="fixed-height">
+
+    </div>
+
+    <div th:if="${nothingPurchased}">
+
+        <span th:text="${nothingPurchased}"></span>
+
+    </div>
+
+
+
+</div>
+
+</body>
+</html>

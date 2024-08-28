@@ -25,6 +25,7 @@ public class OrderDTO {
     private LocalDateTime orderDate; // 주문 날짜
     private String paymentStatus; // 결제 상태  (paid, unpaid)
     private String impUid;
+    private String productCode;
 
 
 

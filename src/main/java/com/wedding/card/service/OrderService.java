@@ -37,6 +37,7 @@ public class OrderService {
                 .merchantUid(orderDTO.getMerchantUid())
                 .paymentStatus(orderDTO.getPaymentStatus())
                 .productName(orderDTO.getProductName())
+                .productCode(orderDTO.getProductCode())
                 .build();
     }
 
@@ -59,6 +60,7 @@ public class OrderService {
                 .amount(orderDTO.getAmount())
                 .member(member)
                 .impUid(orderDTO.getImpUid())
+                .productCode(orderDTO.getProductCode())
                 .build();
 
         member.setOrderState("paid");
