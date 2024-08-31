@@ -19,6 +19,7 @@
     <form th:action="@{/productUpdate/{id}(id=${product.get().getId()})}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="picPath" th:value="${product.get().getPicPath()}">
         <input type="hidden" name="picName" th:value="${product.get().getPicName()}">
+        <input type="hidden" name="originCode" th:value="${product.get().getProductCode()}"/>
         <img class="fixed-height"  th:src="${product.get().getPicPath()}" th:alt="${product.get().getPicName()}">
         <div class="form-group">
             <label for="productName">상품명</label>

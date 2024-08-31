@@ -3,7 +3,9 @@ package com.wedding.card.service;
 
 import com.wedding.card.dto.CardDTO;
 import com.wedding.card.entity.Card;
+import com.wedding.card.entity.Order;
 import com.wedding.card.repository.CardRepository;
+import com.wedding.card.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,7 @@ public class CardService {
 
     private final CardRepository cardRepository;
 
+    private final OrderRepository orderRepository;
 
     //main화면 리스트
     public List<Card> mainList(){
@@ -89,8 +92,10 @@ public class CardService {
     }
 
 
-    public void updateProd(CardDTO cardDTO, MultipartFile picName, Long id) throws IOException {
+    public void updateProd(CardDTO cardDTO, MultipartFile picName, Long id, String originCode)  throws IOException {
         String originName = picName.getOriginalFilename();
+
+        List<Order> byProductCode = orderRepository.findALLByProductCode(originCode);
         if (!picName.isEmpty()) {
 
             UUID uuid = UUID.randomUUID();
@@ -111,6 +116,21 @@ public class CardService {
                     .build();
 
 
+            for (Order existOrder : byProductCode) {
+            Order order = Order.builder()
+                    .id(existOrder.getId())
+                    .productCode(cardDTO.getProductCode())
+                    .orderDate(existOrder.getOrderDate())
+                    .impUid(existOrder.getImpUid())
+                    .merchantUid(existOrder.getMerchantUid())
+                    .paymentStatus(existOrder.getPaymentStatus())
+                    .amount(existOrder.getAmount())
+                    .productName(existOrder.getProductName())
+                    .member(existOrder.getMember())
+                    .build();
+
+            orderRepository.save(order);
+            }
             cardRepository.save(card);
         }else{
 
@@ -121,15 +141,7 @@ public class CardService {
 
                 System.out.println("저장된 경로"+savedPath);
                 System.out.println("새로운 경로"+cardDTO.getPicPath());
-                // 파일 삭제
-//                File file = new File(System.getProperty("user.dir") + "/src/main/resources/static" + savedPath);
-//                if (file.exists()) {
-//                    if (file.delete()) {
-//                        System.out.println("파일 삭제 완료");
-//                    } else {
-//                        System.out.println("파일 삭제 실패");
-//                    }
-//                }
+
             card = Card.builder()
                     .id(id)
                     .productName(cardDTO.getProductName())
@@ -141,6 +153,23 @@ public class CardService {
                     .picPath(savedPath)
                     .build();
 
+
+
+                for (Order existOrder : byProductCode) {
+                    Order order = Order.builder()
+                            .id(existOrder.getId())
+                            .productCode(cardDTO.getProductCode())
+                            .orderDate(existOrder.getOrderDate())
+                            .impUid(existOrder.getImpUid())
+                            .merchantUid(existOrder.getMerchantUid())
+                            .paymentStatus(existOrder.getPaymentStatus())
+                            .amount(existOrder.getAmount())
+                            .productName(existOrder.getProductName())
+                            .member(existOrder.getMember())
+                            .build();
+
+                    orderRepository.save(order);
+                }
             cardRepository.save(card);
             }
         }

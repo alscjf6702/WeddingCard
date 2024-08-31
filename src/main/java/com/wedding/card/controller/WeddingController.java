@@ -85,8 +85,10 @@ public class WeddingController {
 
 
     @PostMapping("/productUpdate/{id}")
-    public String productUpdatePost(@PathVariable("id")Long id, @ModelAttribute CardDTO cardDTO, @RequestParam(value = "picName", required = false) MultipartFile picName) throws IOException {
-            cardService.updateProd(cardDTO, picName, id);
+    public String productUpdatePost(@PathVariable("id")Long id, @ModelAttribute CardDTO cardDTO,
+                                    @RequestParam(value = "picName", required = false) MultipartFile picName,
+                                    @RequestParam(value= "originCode") String originCode) throws IOException {
+            cardService.updateProd(cardDTO, picName,id , originCode);
 
 
         return "redirect:/main";

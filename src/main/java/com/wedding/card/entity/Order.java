@@ -3,6 +3,7 @@ package com.wedding.card.entity;
 import com.wedding.card.dto.OrderDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
+@DynamicUpdate  //수정 시 null값인 컬럼은 쿼리문 전달할 때 제외
 public class Order {
 
     @Id
