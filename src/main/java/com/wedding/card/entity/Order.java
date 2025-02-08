@@ -45,7 +45,7 @@ public class Order {
     private LocalDateTime orderDate; // 주문 일자
 
     @Column(nullable = true)
-    private String productCode;
+    private String productCode; //상품 코드
 
     @PrePersist
     protected void onCreate(){

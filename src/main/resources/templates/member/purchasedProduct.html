@@ -10,7 +10,7 @@
     <div th:if="${purchasedProduct}">
 
         <span th:text="${purchasedProduct.getProductName()}"></span>
-        <img th:src="${purchasedProduct.getPicPath()}" class="fixed-height">
+        <a th:href="${purchasedProduct.getPicPath()}"> <img th:src="${purchasedProduct.getPicPath()}" class="fixed-height"></a>
 
     </div>
 
