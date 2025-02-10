@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
-<th:block th:replace="layouts/config :: config"/>
+<th:block th:replace="~{layouts/config :: config}"/>
 <body class="bg-light">
-<th:block th:replace="layouts/header :: header"></th:block>
+<th:block th:replace="~{layouts/header :: header}"/>
 
 <div class="container">
 
@@ -46,7 +46,7 @@
 
 </div>
 
-<th:block th:replace="layouts/footer :: footer"/>
+<th:block th:replace="~{layouts/footer::footer}"/>
 
 </body>
 </html>

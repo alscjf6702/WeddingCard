@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<th:block th:replace="layouts/config ::config"/>
+<th:block th:replace="~{layouts/config :: config}"/>
 <body>
-<th:block th:replace="layouts/header::header"/>
+<th:block th:replace="~{layouts/header :: header}"/>
 <link th:href="@{/css/info.css}" rel="stylesheet"/>
 
 <main role="main">

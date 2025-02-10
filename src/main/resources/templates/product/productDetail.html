@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<th:block th:replace="layouts/config::config"/>
 
+<th:block th:replace="~{layouts/config :: config}"/>
 <body class="bg-light">
-<th:block th:replace="layouts/header :: header"/>
+<th:block th:replace="~{layouts/header :: header}"/>
+
 <div class="container">
     <!--상품 정보-->
     <div class="position-relative overflow-hidden p-3 p-md-1 m-md-1 text-center bg-light">

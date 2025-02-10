@@ -9,9 +9,9 @@
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
-<th:block th:replace="layouts/config :: config"/>
+<th:block th:replace="~{layouts/config :: config}"/>
 <body class="bg-light">
-<th:block th:replace="layouts/header::header"/>
+<th:block th:replace="~{layouts/header :: header}"/>
 
 <div class="container">
     <div class="py-5 text-center">
@@ -181,6 +181,6 @@ IMP.init("{가맹점 식별코드}"); // 예: imp00000000
 </script>
 
 
-<th:block th:replace="layouts/footer::footer"/>
+<th:block th:replace="~{layouts/footer::footer}"/>
 </body>
 </html>
