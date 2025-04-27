@@ -6,8 +6,8 @@
 
 ## 🛠 사용 기술
 - Backend: Java, Spring Boot
-- Frontend: HTML, CSS
-
+- Frontend: HTML, CSS, Thymeleaf, bootstrap
+- Database : MySql
 ## 🧩 주요 기능
 - 청첩장 등록
 - 청첩장 수정/삭제
@@ -40,6 +40,6 @@
 ### 로그인 페이지
 ![image](https://github.com/user-attachments/assets/f8936d4f-f999-4abb-a67a-70ee92c10e06)
 
-### 결제페이
+### 결제페이지
 ![image](https://github.com/user-attachments/assets/b758338b-e67c-45ab-8e86-fe38a0a50869)
 ![image](https://github.com/user-attachments/assets/ecda74c8-4692-41eb-bdf6-66c4ae1eb647)
